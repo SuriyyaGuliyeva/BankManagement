@@ -16,7 +16,7 @@ namespace BankManagement.Controllers
         }
 
         //get requests
-        [HttpGet("/getBanks")]
+        [HttpGet("/GetBanks")]
         public IActionResult GetBanks()
         {
             var banks = _bankContext.Banks;
