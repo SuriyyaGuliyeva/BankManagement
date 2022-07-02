@@ -1,4 +1,9 @@
+using BankManagement.Business.IService;
+using BankManagement.Business.Service;
 using BankManagement.Context;
+using BankManagement.DataAccess.IRepository;
+using BankManagement.DataAccess.Repository;
+using BankManagement.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,10 +33,14 @@ namespace BankManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.ServiceConfig();
             services.AddDbContext<BankContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BankManagement", Version = "v1" });
