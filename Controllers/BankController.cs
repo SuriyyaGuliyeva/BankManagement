@@ -17,6 +17,7 @@ namespace BankManagement.Controllers
 
         //get requests
         //some changes
+        //test
         [HttpGet("/GetBanks")]
         public IActionResult GetBanks()
         {
