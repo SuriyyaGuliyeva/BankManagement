@@ -1,6 +1,9 @@
-﻿using BankManagement.Business.IService;
+﻿using AutoMapper;
+using BankManagement.Business.IService;
 using BankManagement.DataAccess.IRepository;
 using BankManagement.Entities;
+using BankManagement.RequestModels;
+using BankManagement.ResponseModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,14 +12,18 @@ namespace BankManagement.Business.Service
     public class BankService : IBankService
     {
         private readonly IBankRepository _bankRepository;
+        private readonly IMapper _mapper;
 
-        public BankService(IBankRepository bankRepository)
+        public BankService(IBankRepository bankRepository, IMapper mapper)
         {
             _bankRepository = bankRepository;
+            _mapper = mapper;
         }
-        public async Task<Bank> AddBank(Bank bank)
+        public async Task<CreateBankResponseModel> AddBank(CreateBankRequestModel bankRequest)
         {
-            return await _bankRepository.AddBank(bank);
+            Bank bank = _mapper.Map<Bank>(bankRequest);//request model entity modele cevrilir
+            await _bankRepository.AddBank(bank);//entity modeli insert edir
+            return _mapper.Map<CreateBankResponseModel>(bank);//entity modeli response modele cevirir
         }
 
         public async Task<bool> DeleteBank(int id)
