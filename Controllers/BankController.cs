@@ -1,6 +1,8 @@
 ﻿using BankManagement.Business.IService;
 using BankManagement.Entities;
 using BankManagement.Infrastructure;
+using BankManagement.RequestModels;
+using BankManagement.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -38,10 +40,10 @@ namespace BankManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBank([FromBody] Bank bank)
+        public async Task<IActionResult> AddBank([FromBody] CreateBankRequestModel bankRequest)
         {
-            await _bankService.AddBank(bank);
-            return Ok(bank);
+            CreateBankResponseModel response = await _bankService.AddBank(bankRequest);
+            return Ok(response);
         }
 
         [HttpPut]
