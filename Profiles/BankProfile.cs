@@ -11,6 +11,10 @@ namespace BankManagement.Profiles
         {
             CreateMap<CreateBankRequestModel, Bank>();//from->to
             CreateMap<Bank, CreateBankResponseModel>();
+            CreateMap<EditBankRequestModel, Bank>();
+            CreateMap<Bank, EditBankResponseModel>();
+            CreateMap<Bank, GetBanksResponseModel>();
+            CreateMap<Bank, GetBankResponseModel>();
         }
     }
 }

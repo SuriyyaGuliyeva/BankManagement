@@ -37,19 +37,23 @@ namespace BankManagement.Business.Service
             return true;
         }
 
-        public async Task<Bank> EditBank(Bank bank)
+        public async Task<EditBankResponseModel> EditBank(EditBankRequestModel bankRequest)
         {
-            return await _bankRepository.EditBank(bank);
+            Bank bank = _mapper.Map<Bank>(bankRequest);
+            await _bankRepository.EditBank(bank);
+            return _mapper.Map<EditBankResponseModel>(bank);
         }
 
-        public async Task<Bank> GetBank(int id)
+        public async Task<GetBankResponseModel> GetBank(int id)
         {
-            return await _bankRepository.GetBank(id);
+            Bank bank = await _bankRepository.GetBank(id);
+            return _mapper.Map<GetBankResponseModel>(bank);
         }
 
-        public async Task<List<Bank>> GetBanks()
+        public async Task<List<GetBanksResponseModel>> GetBanks()
         {
-            return await _bankRepository.GetBanks();
+            List<Bank> banks = await _bankRepository.GetBanks();
+            return _mapper.Map<List<GetBanksResponseModel>>(banks);
         }
     }
 }
