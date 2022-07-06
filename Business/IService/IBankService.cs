@@ -10,16 +10,16 @@ namespace BankManagement.Business.IService
     {
         //crud
         //get
-        Task<List<Bank>> GetBanks();
+        Task<List<GetBanksResponseModel>> GetBanks();
 
         //get ID
-        Task<Bank> GetBank(int id);
+        Task<GetBankResponseModel> GetBank(int id);
 
         //create (add)
         Task<CreateBankResponseModel> AddBank(CreateBankRequestModel bankRequest);
 
         //update (edit)
-        Task<Bank> EditBank(Bank bank);
+        Task<EditBankResponseModel> EditBank(EditBankRequestModel bankRequest);
 
         //delete
         Task<bool> DeleteBank(int id);

@@ -42,15 +42,15 @@ namespace BankManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBank([FromBody] CreateBankRequestModel bankRequest)
         {
-            CreateBankResponseModel response = await _bankService.AddBank(bankRequest);
-            return Ok(response);
+            CreateBankResponseModel createBankResponse = await _bankService.AddBank(bankRequest);
+            return Ok(createBankResponse);
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditBank([FromBody] Bank bank)
+        public async Task<IActionResult> EditBank([FromBody] EditBankRequestModel bankRequest)
         {
-            await _bankService.EditBank(bank);
-            return Ok(bank); //NoContent();
+            EditBankResponseModel editBankResponse = await _bankService.EditBank(bankRequest);         
+            return Ok(editBankResponse); //NoContent();
         }
 
         [HttpDelete("/{id}")]
