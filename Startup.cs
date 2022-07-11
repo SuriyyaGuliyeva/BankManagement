@@ -1,23 +1,13 @@
-using BankManagement.Business.IService;
-using BankManagement.Business.Service;
 using BankManagement.Context;
-using BankManagement.DataAccess.IRepository;
-using BankManagement.DataAccess.Repository;
+using BankManagement.ExceptionMiddleware;
 using BankManagement.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BankManagement
 {
@@ -33,6 +23,7 @@ namespace BankManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ExceptionHandlingMiddleware>();
             services.AddAutoMapper(typeof(Startup));
             services.ServiceConfig();
             services.AddDbContext<BankContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
@@ -55,12 +46,14 @@ namespace BankManagement
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankManagement v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankManagement v1"));               
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseAuthorization();
 

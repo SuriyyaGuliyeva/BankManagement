@@ -4,6 +4,7 @@ using BankManagement.Infrastructure;
 using BankManagement.RequestModels;
 using BankManagement.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace BankManagement.Controllers
@@ -31,10 +32,11 @@ namespace BankManagement.Controllers
         {
             var bank = await _bankService.GetBank(id);
 
-            if (bank is null)
-            {
-                return BadRequest("Relevant Bank Id not found");
-            }
+            //if (bank is null)
+            //{
+            //    //return BadRequest("Relevant Bank Id not found");
+            //    throw new System.Exception($"Relevant Bank Not Found with ID = {id}");
+            //}
 
             return Ok(bank);
         }
@@ -49,7 +51,7 @@ namespace BankManagement.Controllers
         [HttpPut]
         public async Task<IActionResult> EditBank([FromBody] EditBankRequestModel bankRequest)
         {
-            EditBankResponseModel editBankResponse = await _bankService.EditBank(bankRequest);         
+            EditBankResponseModel editBankResponse = await _bankService.EditBank(bankRequest);           
             return Ok(editBankResponse); //NoContent();
         }
 
@@ -57,17 +59,14 @@ namespace BankManagement.Controllers
         public async Task<IActionResult> DeleteBank(int id)
         {
             bool result = await _bankService.DeleteBank(id);
-            if (!result)
-            {
-                return NotFound("Relevant Bank Id not found");
-            }
+
+            //if (!result)
+            //{
+            //    //return NotFound("Relevant Bank Id not found");
+            //    throw new System.Exception($"Relevant Bank Not Found with ID = {id}");
+            //}
+
             return Ok(result);
         }
-
-        //[HttpGet("test")]
-        //public IActionResult test()
-        //{
-        //    return Ok("bdu".TestConfig());
-        //}
     }
 }

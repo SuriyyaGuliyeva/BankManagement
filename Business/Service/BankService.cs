@@ -4,6 +4,7 @@ using BankManagement.DataAccess.IRepository;
 using BankManagement.Entities;
 using BankManagement.RequestModels;
 using BankManagement.ResponseModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,24 +30,41 @@ namespace BankManagement.Business.Service
         public async Task<bool> DeleteBank(int id)
         {
             Bank bank = await _bankRepository.GetBank(id);
+
             if (bank is null)
             {
-                return false;
+                //return false;
+                throw new Exception($"Relevant Bank Not Found with ID = {id}");
             }
+
             await _bankRepository.DeleteBank(bank);
             return true;
         }
 
         public async Task<EditBankResponseModel> EditBank(EditBankRequestModel bankRequest)
         {
-            Bank bank = _mapper.Map<Bank>(bankRequest);
-            await _bankRepository.EditBank(bank);
+            Bank bankReq = _mapper.Map<Bank>(bankRequest);          
+
+            Bank bank = await _bankRepository.EditBank(bankReq);
+
+            if (bank is null)
+            {
+                throw new Exception("Relevant Bank Not Found with ID");
+            }
+
             return _mapper.Map<EditBankResponseModel>(bank);
         }
 
         public async Task<GetBankResponseModel> GetBank(int id)
         {
             Bank bank = await _bankRepository.GetBank(id);
+
+            if (bank is null)
+            {
+                //return BadRequest("Relevant Bank Id not found");
+                throw new Exception($"Relevant Bank Not Found with ID = {id}");
+            }
+
             return _mapper.Map<GetBankResponseModel>(bank);
         }
 

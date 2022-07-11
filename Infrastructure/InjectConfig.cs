@@ -12,11 +12,8 @@ namespace BankManagement.Infrastructure
         {
             services.AddScoped<IBankRepository, BankRepository>();
             services.AddScoped<IBankService, BankService>();
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IClientService, ClientService>();
         }
-
-        //public static string TestConfig(this string test)
-        //{
-        //    return test.ToUpper();
-        //}
     }
 }
