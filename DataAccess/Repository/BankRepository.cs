@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace BankManagement.DataAccess.Repository
 {
     public class BankRepository : IBankRepository
-    {
-        //context-i inject etdik
+    {     
         private readonly BankContext _bankContext;
         public BankRepository(BankContext bankContext)
         {
