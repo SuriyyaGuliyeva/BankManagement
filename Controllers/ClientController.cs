@@ -1,5 +1,7 @@
 ﻿using BankManagement.Business.IService;
 using BankManagement.Entities;
+using BankManagement.RequestModels;
+using BankManagement.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -31,17 +33,17 @@ namespace BankManagement.Controllers
         }
 
         [HttpPost]       
-        public async Task<IActionResult> AddClient([FromBody] Client client)
-        {
-            var cl = await _clientService.AddClient(client);
-            return Ok(cl);
+        public async Task<IActionResult> AddClient([FromBody] CreateClientRequestModel clientRequest)
+        {            
+            CreateClientResponseModel createClientResponse = await _clientService.AddClient(clientRequest);            
+            return Ok(createClientResponse);
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditClient([FromBody] Client client)
+        public async Task<IActionResult> EditClient([FromBody] EditClientRequestModel clientRequest)
         {
-            var cl = await _clientService.EditClient(client);
-            return Ok(cl);
+            EditClientResponseModel editClientResponse = await _clientService.EditClient(clientRequest);
+            return Ok(editClientResponse);
         }
 
         [HttpDelete("{id}")]

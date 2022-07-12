@@ -14,6 +14,8 @@ namespace BankManagement.Infrastructure
             services.AddScoped<IBankService, BankService>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<ICreditRepository, CreditRepository>();
+            services.AddScoped<ICreditService, CreditService>();
         }
     }
 }
