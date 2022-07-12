@@ -34,7 +34,7 @@ namespace BankManagement.Business.Service
             if (bank is null)
             {
                 //return false;
-                throw new Exception($"Relevant Bank Not Found with ID = {id}");
+                throw new Exception($"No Matching Bank with ID = {id} found");
             }
 
             await _bankRepository.DeleteBank(bank);
@@ -49,7 +49,7 @@ namespace BankManagement.Business.Service
 
             if (bank is null)
             {
-                throw new Exception("Relevant Bank Not Found with ID");
+                throw new Exception($"No Matching Bank with ID = {bank.Id} found");
             }
 
             return _mapper.Map<EditBankResponseModel>(bank);
@@ -62,7 +62,7 @@ namespace BankManagement.Business.Service
             if (bank is null)
             {
                 //return BadRequest("Relevant Bank Id not found");
-                throw new Exception($"Relevant Bank Not Found with ID = {id}");
+                throw new Exception($"No Matching Bank with ID = {id} found");
             }
 
             return _mapper.Map<GetBankResponseModel>(bank);
