@@ -16,6 +16,7 @@ namespace BankManagement.DataAccess.Repository
         {
             _bankContext = bankContext;
         }
+
         public async Task<Credit> AddCredit(Credit credit)
         {
             await _bankContext.Credits.AddAsync(credit);
@@ -38,7 +39,10 @@ namespace BankManagement.DataAccess.Repository
 
         public async Task<Credit> GetCredit(int id)
         {
-            Credit credit = await _bankContext.Credits.Where(cr => cr.Id == id).FirstOrDefaultAsync();
+            Credit credit = await _bankContext.Credits.Where(cr => cr.Id == id)
+                .Include(cr => cr.Bank)
+                .Include(cr => cr.Client)
+                .FirstOrDefaultAsync();
             return credit;
         }
 

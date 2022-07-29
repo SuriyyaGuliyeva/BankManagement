@@ -10,7 +10,13 @@ namespace BankManagement.Profiles
         public CreditProfile()
         {
             CreateMap<CreateCreditRequestModel, Credit>();
-            CreateMap<Credit, CreateCreditResponseModel>();
+            CreateMap<Credit, CreateCreditResponseModel>()
+                .ForMember(dest =>
+                dest.BankName,
+                opt => opt.MapFrom(src => src.Bank.Name))
+                .ForMember(dest =>
+                dest.ClientName,
+                opt => opt.MapFrom(src => src.Client.Name));
         }
     }
 }

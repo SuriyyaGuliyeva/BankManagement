@@ -27,7 +27,7 @@ namespace BankManagement.Controllers
             return Ok(banks);
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetBank(int id)
         {
             var bank = await _bankService.GetBank(id);
@@ -55,7 +55,7 @@ namespace BankManagement.Controllers
             return Ok(editBankResponse); //NoContent();
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBank(int id)
         {
             bool result = await _bankService.DeleteBank(id);

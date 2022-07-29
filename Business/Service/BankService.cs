@@ -43,14 +43,16 @@ namespace BankManagement.Business.Service
 
         public async Task<EditBankResponseModel> EditBank(EditBankRequestModel bankRequest)
         {
-            Bank bankReq = _mapper.Map<Bank>(bankRequest);          
-
-            Bank bank = await _bankRepository.EditBank(bankReq);
+            Bank bank = await _bankRepository.GetBank(bankRequest.Id);
 
             if (bank is null)
             {
-                throw new Exception($"No Matching Bank with ID = {bank.Id} found");
-            }
+                throw new Exception($"No Matching Bank with ID = {bankRequest.Id} found");
+            };
+
+            bank = _mapper.Map<Bank>(bankRequest);
+
+            bank = await _bankRepository.EditBank(bank);
 
             return _mapper.Map<EditBankResponseModel>(bank);
         }

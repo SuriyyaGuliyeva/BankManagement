@@ -22,8 +22,10 @@ namespace BankManagement.Business.Service
         public async Task<CreateCreditResponseModel> AddCredit(CreateCreditRequestModel creditRequest)
         {
             Credit creditReq = _mapper.Map<Credit>(creditRequest);
+
             var credit = await _creditRepository.AddCredit(creditReq);
-            return _mapper.Map<CreateCreditResponseModel>(credit);
+            var credit1 = await _creditRepository.GetCredit(credit.Id);
+            return _mapper.Map<CreateCreditResponseModel>(credit1);
         }
 
         public async Task<bool> DeleteCredit(int id)
