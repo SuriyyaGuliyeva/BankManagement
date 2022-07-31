@@ -8,10 +8,10 @@ namespace BankManagement.Business.IService
 {
     public interface ICreditService
     {
-        Task<List<Credit>> GetCredits();
-        Task<Credit> GetCredit(int id);
+        Task<List<GetCreditsResponseModel>> GetCredits();
+        Task<GetCreditResponseModel> GetCredit(int id);
         Task<CreateCreditResponseModel> AddCredit(CreateCreditRequestModel credit);
-        Task<Credit> EditCredit(Credit credit);
+        Task<EditCreditResponseModel> EditCredit(EditCreditRequestModel credit);
         Task<bool> DeleteCredit(int id);
     }
 }

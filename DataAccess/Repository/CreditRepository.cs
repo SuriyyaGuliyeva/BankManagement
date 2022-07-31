@@ -43,12 +43,16 @@ namespace BankManagement.DataAccess.Repository
                 .Include(cr => cr.Bank)
                 .Include(cr => cr.Client)
                 .FirstOrDefaultAsync();
+
             return credit;
         }
 
         public async Task<List<Credit>> GetCredits()
         {
-            var credits = await _bankContext.Credits.ToListAsync();
+            List<Credit> credits = await _bankContext.Credits
+                .Include(cr => cr.Bank)
+                .Include(cr => cr.Client)
+                .ToListAsync();
             return credits;
         }
     }

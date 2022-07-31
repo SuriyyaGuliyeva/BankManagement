@@ -38,7 +38,7 @@ namespace BankManagement.DataAccess.Repository
 
         public async Task<Client> GetClient(int id)
         {
-            Client client = await _bankContext.Clients.Where(c => c.Id == id).FirstOrDefaultAsync();
+            Client client = await _bankContext.Clients.FindAsync(id);
             return client;
         }
 

@@ -51,7 +51,6 @@ namespace BankManagement.Business.Service
             };
 
             bank = _mapper.Map<Bank>(bankRequest);
-
             bank = await _bankRepository.EditBank(bank);
 
             return _mapper.Map<EditBankResponseModel>(bank);

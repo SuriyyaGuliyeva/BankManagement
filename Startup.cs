@@ -48,7 +48,7 @@ namespace BankManagement
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankManagement v1"));               
             }
 
-            app.UseMiddleware<ExceptionHandlerMiddleware>();
+            app.UseMiddleware<ExceptionHandlerMiddleware>(); //Global Error Handler Middleware
 
             app.UseHttpsRedirection();
 
