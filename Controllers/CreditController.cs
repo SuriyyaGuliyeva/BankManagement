@@ -42,10 +42,10 @@ namespace BankManagement.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditCredit([FromBody] Credit credit)
+        public async Task<IActionResult> EditCredit([FromBody] EditCreditRequestModel creditReq)
         {
-            Credit cr = await _creditService.EditCredit(credit);
-            return Ok(cr);
+            EditCreditResponseModel credit = await _creditService.EditCredit(creditReq);
+            return Ok(credit);
         }
 
         [HttpDelete("{id}")]

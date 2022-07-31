@@ -31,13 +31,6 @@ namespace BankManagement.Controllers
         public async Task<IActionResult> GetBank(int id)
         {
             var bank = await _bankService.GetBank(id);
-
-            //if (bank is null)
-            //{
-            //    //return BadRequest("Relevant Bank Id not found");
-            //    throw new System.Exception($"Relevant Bank Not Found with ID = {id}");
-            //}
-
             return Ok(bank);
         }
 

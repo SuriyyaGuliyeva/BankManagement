@@ -43,13 +43,15 @@ namespace BankManagement.Business.Service
 
         public async Task<EditClientResponseModel> EditClient(EditClientRequestModel clientRequest)
         {
-            Client clientReq = _mapper.Map<Client>(clientRequest);
-            Client client = await _clientRepository.EditClient(clientReq);
+            Client client = await _clientRepository.GetClient(clientRequest.Id);
 
             if (client is null)
             {
-                throw new Exception($"No Matching Client with ID = {client.Id} found");
+                throw new Exception($"No Matching Client with ID = {clientRequest.Id} found");
             }
+
+            client = _mapper.Map<Client>(clientRequest);
+            client = await _clientRepository.EditClient(client);         
 
             return _mapper.Map<EditClientResponseModel>(client);
         }
