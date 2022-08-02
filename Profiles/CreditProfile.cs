@@ -19,11 +19,7 @@ namespace BankManagement.Profiles
                 .ForMember(dest => dest.ClientName,
                             opt => opt.MapFrom(src => src.Client.Name));
 
-            CreateMap<Credit, GetCreditResponseModel>()
-                .ForMember(dest => dest.BankName,
-                            opt => opt.MapFrom(src => src.Bank.Name))
-                .ForMember(dest => dest.ClientName,
-                            opt => opt.MapFrom(src => src.Client.Name));
+            CreateMap<Credit, GetCreditResponseModel>();
 
             CreateMap<EditCreditRequestModel, Credit>();
             CreateMap<Credit, EditCreditResponseModel>();

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "aBRbqE//k6/agclIgNzkiKuNfGsvml2XlLBYUtYCSYAHVFq8vqy1irPX7T8DADkUm22g5T6TCunS4ishTkku/g==",
+  "dgSpecHash": "KFfhxqsDQbAKLrAuBMaj5F6Ndo4T/B1BthHLAIn/1KGDo9Ek6/tcUC1MhlD57AcRHng1fda2474ojBELS+tXnQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\OneDrive\\Masaüstü\\BankManagement\\BankManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.17\\microsoft.aspnetcore.jsonpatch.5.0.17.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.17\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.17.nupkg.sha512",

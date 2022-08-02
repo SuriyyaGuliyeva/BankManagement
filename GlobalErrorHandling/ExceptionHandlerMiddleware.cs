@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -32,10 +33,13 @@ namespace BankManagement.GlobalErrorHandling
             context.Response.ContentType = "application/json";
             int statusCode = (int)HttpStatusCode.InternalServerError;
 
-            if (exception.GetType().IsAssignableFrom(typeof(NullReferenceException)))
+            if (exception.GetType().IsAssignableFrom(typeof(NullReferenceException)) ||
+                exception.GetType().IsAssignableFrom(typeof(FileNotFoundException)))
             {
                 statusCode = (int)HttpStatusCode.NotFound;
             }
+
+            //sonralarda SqlException error lazim ola biler.
 
             var result = JsonConvert.SerializeObject(new {
                 StatusCode = statusCode,
