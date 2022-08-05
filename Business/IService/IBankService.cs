@@ -10,7 +10,8 @@ namespace BankManagement.Business.IService
     {
         //crud
         //get
-        Task<List<GetBanksResponseModel>> GetBanks();
+        Task<IEnumerable<GetBanksResponseModel>> GetBanks();
+        //Task<List<GetBanksResponseModel>> GetBanks();
 
         //get ID
         Task<GetBankResponseModel> GetBank(int id);

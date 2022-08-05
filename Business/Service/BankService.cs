@@ -22,9 +22,9 @@ namespace BankManagement.Business.Service
         }
         public async Task<CreateBankResponseModel> AddBank(CreateBankRequestModel bankRequest)
         {
-            Bank bank = _mapper.Map<Bank>(bankRequest);//request model entity modele cevrilir
-            await _bankRepository.AddBank(bank);//entity modeli insert edir
-            return _mapper.Map<CreateBankResponseModel>(bank);//entity modeli response modele cevirir
+            Bank bank = _mapper.Map<Bank>(bankRequest);
+            await _bankRepository.AddBank(bank);
+            return _mapper.Map<CreateBankResponseModel>(bank);
         }
 
         public async Task<bool> DeleteBank(int id)
@@ -69,10 +69,16 @@ namespace BankManagement.Business.Service
             return _mapper.Map<GetBankResponseModel>(bank);
         }
 
-        public async Task<List<GetBanksResponseModel>> GetBanks()
+        public async Task<IEnumerable<GetBanksResponseModel>> GetBanks()
         {
-            List<Bank> banks = await _bankRepository.GetBanks();
+            var banks = await _bankRepository.GetBanks();
             return _mapper.Map<List<GetBanksResponseModel>>(banks);
         }
+
+        //public async Task<List<GetBanksResponseModel>> GetBanks()
+        //{
+        //    List<Bank> banks = await _bankRepository.GetBanks();
+        //    return _mapper.Map<List<GetBanksResponseModel>>(banks);
+        //}
     }
 }

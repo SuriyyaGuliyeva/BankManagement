@@ -199,3 +199,4 @@ C:\Users\user\OneDrive\Masaüstü\BankManagement\obj\Debug\net5.0\refint\BankMan
 C:\Users\user\OneDrive\Masaüstü\BankManagement\obj\Debug\net5.0\BankManagement.pdb
 C:\Users\user\OneDrive\Masaüstü\BankManagement\obj\Debug\net5.0\BankManagement.genruntimeconfig.cache
 C:\Users\user\OneDrive\Masaüstü\BankManagement\obj\Debug\net5.0\ref\BankManagement.dll
+C:\Users\user\OneDrive\Masaüstü\BankManagement\bin\Debug\net5.0\Dapper.dll
