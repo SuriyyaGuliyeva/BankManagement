@@ -6,7 +6,8 @@ namespace BankManagement.DataAccess.IRepository
 {
     public interface IClientRepository
     {
-        //get
+        //CRUD Operations
+        //get list
         Task<List<Client>> GetClients();
 
         //get ID
