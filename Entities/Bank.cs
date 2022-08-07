@@ -9,7 +9,6 @@ namespace BankManagement.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal CreditRate { get; set; }
-
         public ICollection<Credit> Credits { get; set; }
     }
 }

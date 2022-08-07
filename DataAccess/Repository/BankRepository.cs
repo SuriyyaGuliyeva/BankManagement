@@ -22,22 +22,11 @@ namespace BankManagement.DataAccess.Repository
             _bankContext = bankContext;
             _dbConnection = new SqlConnection(configuration.GetConnectionString("ConnectionString"));
         }
-
-        //with EF
-        //public async Task<Bank> AddBank(Bank bank)
-        //{
-        //    await _bankContext.Banks.AddAsync(bank);
-        //    await _bankContext.SaveChangesAsync();
-        //    return bank;
-        //}
-
-        //with Dapper
-        public async Task<int> AddBank(Bank bank)
+        public async Task<Bank> AddBank(Bank bank)
         {
-            var sql = "insert into Banks (Name, CreditRate) values (@Name, @CreditRate)";           
-            var insertedBank = await _dbConnection.ExecuteAsync(sql, bank);
-
-            return insertedBank;
+            await _bankContext.Banks.AddAsync(bank);
+            await _bankContext.SaveChangesAsync();
+            return bank;
         }
 
         public async Task DeleteBank(Bank bank)
@@ -46,22 +35,12 @@ namespace BankManagement.DataAccess.Repository
             await _bankContext.SaveChangesAsync();
         }
 
-        //with EF
         public async Task<Bank> EditBank(Bank bank)
         {
             _bankContext.Banks.Update(bank);
             await _bankContext.SaveChangesAsync();
             return bank;
         }
-
-        //with Dapper
-        //public async Task<int> EditBank(Bank bank)
-        //{
-        //    var sql = "update banks set name=@Name, creditrate = @CreditRate where id=@Id";
-        //    var editedBank = await _dbConnection.ExecuteAsync(sql, bank);
-
-        //    return editedBank;
-        //}
 
         public async Task<Bank> GetBank(int id)
         {
@@ -76,20 +55,17 @@ namespace BankManagement.DataAccess.Repository
             //return bank;
         }
 
-        //with EF
-        //public async Task<List<Bank>> GetBanks()
-        //{
-        //    List<Bank> banks = await _bankContext.Banks.ToListAsync();
-        //    return banks;
-        //}
-
-        //with Dapper
-        public async Task<IEnumerable<Bank>> GetBanks()
-        {            
-            var sql = "select * from Banks";
+        public async Task<List<Bank>> GetBanks()
+        {
+            //with Dapper
+            var sql = "select name from Banks";
             var banks = await _dbConnection.QueryAsync<Bank>(sql);
 
-            return banks;
+            return banks.ToList();
+
+            //with EF
+            //List<Bank> banks = await _bankContext.Banks.ToListAsync();
+            //return banks;
         }
     }
 }
