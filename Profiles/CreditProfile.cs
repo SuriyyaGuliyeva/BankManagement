@@ -16,8 +16,10 @@ namespace BankManagement.Profiles
             CreateMap<Credit, GetCreditsResponseModel>()
                 .ForMember(dest => dest.BankName,
                             opt => opt.MapFrom(src => src.Bank.Name))
-                .ForMember(dest => dest.ClientName,
-                            opt => opt.MapFrom(src => src.Client.Name));
+                .ForMember(dest => dest.BankId,
+                            opt => opt.MapFrom(src => src.Bank.Id));
+            //.ForMember(dest => dest.ClientName,
+            //            opt => opt.MapFrom(src => src.Client.Name));
 
             CreateMap<Credit, GetCreditResponseModel>();
 
