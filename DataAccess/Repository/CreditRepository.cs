@@ -5,6 +5,7 @@ using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -56,6 +57,7 @@ namespace BankManagement.DataAccess.Repository
             //with Dapper           
             var sql = "select * from credits where id = @Id";
             var credit = await _dbConnection.QuerySingleAsync<Credit>(sql, new { Id = id });
+
             return credit;
         }
 
@@ -70,14 +72,16 @@ namespace BankManagement.DataAccess.Repository
 
             //with Dapper
             //var sql = "select cr.Id, b.Name as BankName, cl.Name as ClientName, cr.CreditRate, cr.CreditAmount, cr.StartDate, cr.EndDate, cr.Paid from credits as cr left join banks as b on b.Id = cr.BankId left join clients as cl on cl.Id = cr.ClientId";
-            var sql = @"select cr.Id, b.Name as bankName, cr.CreditRate, cr.CreditAmount, cr.StartDate, cr.EndDate, cr.Paid from credits as cr left join banks as b on cr.BankId = b.Id";
+
+            var sql = @"select c.Id, CreditAmount, c.CreditRate, StartDate, EndDate, Paid, c.BankId as bankId from credits c left join banks b on c.BankId = b.Id";
+
             var credits = await _dbConnection.QueryAsync<Credit, Bank, Credit>(sql, (credit, bank) => {
                 credit.Bank = bank;
                 return credit;
             },
-            splitOn: "bankName");
+            splitOn: "bankId");
 
-            return credits.ToList();
+            return credits.ToList();  
         }
     }
 }
