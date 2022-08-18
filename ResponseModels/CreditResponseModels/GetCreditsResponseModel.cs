@@ -7,7 +7,6 @@ namespace BankManagement.ResponseModels.CreditResponseModels
     {
         public int Id { get; set; }
         //public string ClientName { get; set; }
-        public int BankId { get; set; }
         public string BankName { get; set; }
         public decimal CreditAmount { get; set; }
         public decimal CreditRate { get; set; }
