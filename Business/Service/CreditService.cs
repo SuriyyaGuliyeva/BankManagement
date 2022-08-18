@@ -72,7 +72,9 @@ namespace BankManagement.Business.Service
         public async Task<List<GetCreditsResponseModel>> GetCredits()
         {
             List<Credit> credits = await _creditRepository.GetCredits();
-            return _mapper.Map<List<GetCreditsResponseModel>>(credits);     
-        }      
+            var creditList = _mapper.Map<List<GetCreditsResponseModel>>(credits);
+
+            return creditList;
+        }
     }
 }

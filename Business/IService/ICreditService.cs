@@ -8,7 +8,7 @@ namespace BankManagement.Business.IService
 {
     public interface ICreditService
     {
-        Task<List<GetCreditsResponseModel>> GetCredits();
+        Task<List<GetCreditsResponseModel>> GetCredits();        
         Task<GetCreditResponseModel> GetCredit(int id);
         Task<CreateCreditResponseModel> AddCredit(CreateCreditRequestModel credit);
         Task<EditCreditResponseModel> EditCredit(EditCreditRequestModel credit);
