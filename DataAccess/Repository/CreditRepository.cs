@@ -1,6 +1,7 @@
 ﻿using BankManagement.Context;
 using BankManagement.DataAccess.IRepository;
 using BankManagement.Entities;
+using BankManagement.ResponseModels.CreditResponseModels;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -63,25 +64,35 @@ namespace BankManagement.DataAccess.Repository
 
         public async Task<List<Credit>> GetCredits()
         {
-            //with EF
-            //List<Credit> credits = await _bankContext.Credits
-            //    .Include(cr => cr.Bank)
-            //    .Include(cr => cr.Client)
-            //    .ToListAsync();
-            //return credits;
+            List<Credit> credits = await _bankContext.Credits
+                .Include(cr => cr.Bank)
+                .Include(cr => cr.Client)
+                .ToListAsync();
+            return credits;
+        }
 
-            //with Dapper
-            //var sql = "select cr.Id, b.Name as BankName, cl.Name as ClientName, cr.CreditRate, cr.CreditAmount, cr.StartDate, cr.EndDate, cr.Paid from credits as cr left join banks as b on b.Id = cr.BankId left join clients as cl on cl.Id = cr.ClientId";
+        public async Task<List<GetCreditsResponseModel>> GetCreditsWithDapper()
+        {
 
-            var sql = @"select c.Id, CreditAmount, c.CreditRate, StartDate, EndDate, Paid, b.Id as bankId, b.Name as bankName from credits c left join banks b on c.BankId = b.Id";
+            #region Senin yazdigin menasiz hisse
+            ////with Dapper
+            ////var sql = "select cr.Id, b.Name as BankName, cl.Name as ClientName, cr.CreditRate, cr.CreditAmount, cr.StartDate, cr.EndDate, cr.Paid from credits as cr left join banks as b on b.Id = cr.BankId left join clients as cl on cl.Id = cr.ClientId";
 
-            var credits = await _dbConnection.QueryAsync<Credit, Bank, Credit>(sql, (credit, bank) => {
-                credit.Bank = bank;
-                return credit;
-            },
-            splitOn: "bankId, bankName");
+            //var sql = @"select c.Id, CreditAmount, c.CreditRate, StartDate, EndDate, Paid, b.Id as bankId, b.Name as bankName from credits c left join banks b on c.BankId = b.Id";
 
-            return credits.ToList();
+            //var credits = await _dbConnection.QueryAsync<Credit, Bank, Credit>(sql, (credit, bank) => {
+            //    credit.Bank = bank;
+            //    return credit;
+            //},
+            //splitOn: "bankId, bankName");
+            #endregion Senin yazdigin menasiz hisse
+
+            string sql = @"select c.Id, CreditAmount, c.CreditRate, StartDate, EndDate, Paid, b.Id as bankId, b.Name as BankName from credits c left join banks b on c.BankId = b.Id";
+
+            //new {}  eger sql-e parameter gondermek lazim olarsa onun icinde yazilacaq
+            //meselen parameter @BankId olars new {BankId=neyese} bele olacaq 
+            List<GetCreditsResponseModel> credits = (await _dbConnection.QueryAsync<GetCreditsResponseModel>(sql,new { })).ToList();
+            return credits;
         }
     }
 }

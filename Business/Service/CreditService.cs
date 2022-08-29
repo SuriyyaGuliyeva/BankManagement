@@ -71,10 +71,14 @@ namespace BankManagement.Business.Service
 
         public async Task<List<GetCreditsResponseModel>> GetCredits()
         {
-            List<Credit> credits = await _creditRepository.GetCredits();
-            var creditList = _mapper.Map<List<GetCreditsResponseModel>>(credits);
+            //List<Credit> credits = await _creditRepository.GetCredits();
+            //var creditList = _mapper.Map<List<GetCreditsResponseModel>>(credits);
 
-            return creditList;
+            //return creditList;
+
+            //mappere ehtiyac yoxdu dapper isledende !!!!!!!!!!!!!!!!!!!!!!
+
+            return await _creditRepository.GetCreditsWithDapper();
         }
     }
 }
