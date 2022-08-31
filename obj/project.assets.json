@@ -5819,19 +5819,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Asus Tuf Gaming\\.nuget\\packages\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus Tuf Gaming\\source\\repos\\Wallet\\BankManagement\\BankManagement.csproj",
+      "projectUniqueName": "C:\\Users\\user\\OneDrive\\Masaüstü\\BankManagement\\BankManagement.csproj",
       "projectName": "BankManagement",
-      "projectPath": "C:\\Users\\Asus Tuf Gaming\\source\\repos\\Wallet\\BankManagement\\BankManagement.csproj",
-      "packagesPath": "C:\\Users\\Asus Tuf Gaming\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus Tuf Gaming\\source\\repos\\Wallet\\BankManagement\\obj\\",
+      "projectPath": "C:\\Users\\user\\OneDrive\\Masaüstü\\BankManagement\\BankManagement.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\OneDrive\\Masaüstü\\BankManagement\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Asus Tuf Gaming\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5908,12 +5913,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[5.0.12, 5.0.12]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5922,7 +5921,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

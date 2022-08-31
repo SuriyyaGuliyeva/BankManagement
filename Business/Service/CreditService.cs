@@ -76,8 +76,6 @@ namespace BankManagement.Business.Service
 
             //return creditList;
 
-            //mappere ehtiyac yoxdu dapper isledende !!!!!!!!!!!!!!!!!!!!!!
-
             return await _creditRepository.GetCreditsWithDapper();
         }
     }

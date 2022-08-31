@@ -53,12 +53,12 @@ namespace BankManagement.DataAccess.Repository
             //with EF
             //Bank bank = await _bankContext.Banks.Where(b => b.Id == id).FirstOrDefaultAsync();
             //return bank;
-        }
+        }  
 
         public async Task<List<Bank>> GetBanks()
         {
             //with Dapper
-            var sql = "select name from Banks";
+            var sql = "select * from Banks";
             var banks = await _dbConnection.QueryAsync<Bank>(sql);
 
             return banks.ToList();
