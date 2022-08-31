@@ -10,7 +10,7 @@ namespace BankManagement.DataAccess.IRepository
         //get list
         Task<List<Bank>> GetBanks();
 
-        //get ID
+        //get ID 
         Task<Bank> GetBank(int id);
 
         //create (add)
