@@ -25,31 +25,21 @@ namespace BankManagement.Business.Service
         {
             Client client = _mapper.Map<Client>(clientRequest);
             await _clientRepository.AddClient(client);
+
             return _mapper.Map<CreateClientResponseModel>(client);
         }
 
         public async Task<bool> DeleteClient(int id)
         {
-            Client client = await _clientRepository.GetClient(id);
-
-            if (client is null)
-            {
-                throw new Exception($"No Matching Client with ID = {id} found");
-            }
-
+            Client client = await _clientRepository.GetClient(id);            
             await _clientRepository.DeleteClient(client);
+
             return true;
         }
 
         public async Task<EditClientResponseModel> EditClient(EditClientRequestModel clientRequest)
         {
             Client client = await _clientRepository.GetClient(clientRequest.Id);
-
-            if (client is null)
-            {
-                throw new Exception($"No Matching Client with ID = {clientRequest.Id} found");
-            }
-
             client = _mapper.Map<Client>(clientRequest);
             client = await _clientRepository.EditClient(client);         
 
@@ -60,17 +50,13 @@ namespace BankManagement.Business.Service
         {
             Client client = await _clientRepository.GetClient(id);
 
-            if (client is null)
-            {
-                throw new Exception($"No Matching Client with ID = {id} found");
-            }
-
             return _mapper.Map<GetClientResponseModel>(client);
         }
 
         public async Task<List<GetClientsResponseModel>> GetClients()
         {
             List<Client> clients = await _clientRepository.GetClients();
+
             return _mapper.Map<List<GetClientsResponseModel>>(clients);
         }
     }
