@@ -31,26 +31,15 @@ namespace BankManagement.Business.Service
 
         public async Task<bool> DeleteCredit(int id)
         {
-            Credit credit = await _creditRepository.GetCredit(id);
-
-            if (credit is null)
-            {
-                throw new Exception($"No Matching Client with ID = {id} found");
-            }
-
+            Credit credit = await _creditRepository.GetCredit(id);           
             await _creditRepository.DeleteCredit(credit);
+
             return true;
         }
 
         public async Task<EditCreditResponseModel> EditCredit(EditCreditRequestModel creditRequest)
         {
             Credit credit = await _creditRepository.GetCredit(creditRequest.Id);
-
-            if (credit is null)
-            {
-                throw new Exception($"No Matching Client with ID = {creditRequest.Id} found");
-            }
-
             credit = _mapper.Map<Credit>(creditRequest);
             credit = await _creditRepository.EditCredit(credit);
 
@@ -61,21 +50,18 @@ namespace BankManagement.Business.Service
         {
             Credit credit = await _creditRepository.GetCredit(id);
 
-            if (credit is null)
-            {
-                throw new NullReferenceException($"No Matching Client with ID = {id} found");
-            }
-
             return _mapper.Map<GetCreditResponseModel>(credit);
         }
 
         public async Task<List<GetCreditsResponseModel>> GetCredits()
         {
+            //with EF
             //List<Credit> credits = await _creditRepository.GetCredits();
             //var creditList = _mapper.Map<List<GetCreditsResponseModel>>(credits);
 
             //return creditList;
 
+            //with Dapper
             return await _creditRepository.GetCreditsWithDapper();
         }
     }

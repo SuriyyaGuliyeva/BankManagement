@@ -30,26 +30,14 @@ namespace BankManagement.Business.Service
         public async Task<bool> DeleteBank(int id)
         {
             Bank bank = await _bankRepository.GetBank(id);
-
-            if (bank is null)
-            {
-                //return false;
-                throw new Exception($"No Matching Bank with ID = {id} found");
-            }
-
             await _bankRepository.DeleteBank(bank);
+
             return true;
         }
 
         public async Task<EditBankResponseModel> EditBank(EditBankRequestModel bankRequest)
         {
             Bank bank = await _bankRepository.GetBank(bankRequest.Id);
-
-            if (bank is null)
-            {
-                throw new Exception($"No Matching Bank with ID = {bankRequest.Id} found");
-            };
-
             bank = _mapper.Map<Bank>(bankRequest);
             bank = await _bankRepository.EditBank(bank);
 
@@ -59,12 +47,6 @@ namespace BankManagement.Business.Service
         public async Task<GetBankResponseModel> GetBank(int id)
         {
             Bank bank = await _bankRepository.GetBank(id);
-
-            if (bank is null)
-            {
-                //return BadRequest("Relevant Bank Id not found");
-                throw new Exception($"No Matching Bank with ID = {id} found");
-            }
 
             return _mapper.Map<GetBankResponseModel>(bank);
         }

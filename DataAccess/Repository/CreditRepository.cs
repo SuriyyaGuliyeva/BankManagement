@@ -56,6 +56,7 @@ namespace BankManagement.DataAccess.Repository
         //    return credit;
         //}
 
+        //with Dapper
         public async Task<Credit> GetCredit(int id)
         {
             var sql = "select * from credits where id = @Id";
@@ -71,16 +72,16 @@ namespace BankManagement.DataAccess.Repository
                 .Include(cr => cr.Bank)
                 .Include(cr => cr.Client)
                 .ToListAsync();
+
             return credits;
         }
 
         //with Dapper
         public async Task<List<GetCreditsResponseModel>> GetCreditsWithDapper()
         {
-            //string sql = @"select c.Id, CreditAmount, c.CreditRate, StartDate, EndDate, Paid, b.Id as bankId, b.Name as BankName from credits c left join banks b on c.BankId = b.Id";
-            string sql = "exec sp_joiningTables";
-
+            string sql = @"select c.Id, CreditAmount, StartDate, EndDate, Paid, b.CreditRate as CreditRate, b.Name as BankName, cl.Name as ClientName from credits c left join banks b on c.BankId = b.Id left join Clients cl on c.ClientId = cl.Id";
             List<GetCreditsResponseModel> credits = (await _dbConnection.QueryAsync<GetCreditsResponseModel>(sql, new { })).ToList();
+
             return credits;
         }
     }
