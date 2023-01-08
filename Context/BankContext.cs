@@ -15,6 +15,19 @@ namespace BankManagement.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<Credit>().HasKey(x => new { x.BankId, x.ClientId });
+
+            //modelBuilder.Entity<Credit>()
+            //    .HasOne(m => m.Bank)
+            //    .WithMany(ma => ma.Credits)
+            //    .HasForeignKey(m => m.BankId);
+
+            //modelBuilder.Entity<Credit>()
+            //    .HasOne(m => m.Client)
+            //    .WithMany(ma => ma.Credits)
+            //    .HasForeignKey(a => a.ClientId);
         }
 
         //entities

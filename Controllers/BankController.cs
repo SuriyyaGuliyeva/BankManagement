@@ -1,6 +1,11 @@
-﻿using BankManagement.Context;
-using Microsoft.AspNetCore.Http;
+﻿using BankManagement.Business.IService;
+using BankManagement.Entities;
+using BankManagement.Infrastructure;
+using BankManagement.RequestModels;
+using BankManagement.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace BankManagement.Controllers
 {
@@ -8,19 +13,53 @@ namespace BankManagement.Controllers
     [ApiController]
     public class BankController : ControllerBase
     {
-        private readonly BankContext _bankContext;
+        private readonly IBankService _bankService;
 
-        public BankController(BankContext bankContext)
+        public BankController(IBankService bankService)
         {
-            _bankContext = bankContext;
+            _bankService = bankService;
         }
 
-        //get requests
-        [HttpGet("/getBanks")]
-        public IActionResult GetBanks()
+        [HttpGet]
+        public async Task<IActionResult> GetBanks()
         {
-            var banks = _bankContext.Banks;
+            var banks = await _bankService.GetBanks();
             return Ok(banks);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBank(int id)
+        {
+            var bank = await _bankService.GetBank(id);
+            return Ok(bank);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddBank([FromBody] CreateBankRequestModel bankRequest)
+        {
+            CreateBankResponseModel createBankResponse = await _bankService.AddBank(bankRequest);
+            return Ok(createBankResponse);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> EditBank([FromBody] EditBankRequestModel bankRequest)
+        {
+            EditBankResponseModel editBankResponse = await _bankService.EditBank(bankRequest);           
+            return Ok(editBankResponse); //NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBank(int id)
+        {
+            bool result = await _bankService.DeleteBank(id);
+
+            //if (!result)
+            //{
+            //    //return NotFound("Relevant Bank Id not found");
+            //    throw new System.Exception($"Relevant Bank Not Found with ID = {id}");
+            //}
+
+            return Ok(result);
         }
     }
 }
